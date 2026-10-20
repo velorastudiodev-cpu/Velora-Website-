@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Sitemap: https://velora-studio.privgpwow.chatgpt.site/sitemap.xml
