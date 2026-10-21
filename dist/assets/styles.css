@@ -331,3 +331,46 @@ button { cursor: pointer; }
   .footer-top, .footer-bottom { flex-direction: column; }
   .footer-nav { gap: 10px 35px; }
 }
+
+/* Revised PRD surfaces: packages and FAQ keep the editorial system while
+   allowing comparison content to remain readable on small screens. */
+.package-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: stretch; }
+.package-card { display: flex; flex-direction: column; min-height: 520px; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--white); }
+.package-card--violet { border-color: transparent; background: var(--violet); color: var(--white); }
+.package-label { color: var(--violet); font-size: 11px; font-weight: 700; letter-spacing: .1em; line-height: 1.4; text-transform: uppercase; }
+.package-card--violet .package-label { color: var(--blue); }
+.package-card h2 { margin: 62px 0 16px; font-family: 'Space Grotesk', sans-serif; font-size: clamp(30px, 4vw, 48px); letter-spacing: -.055em; line-height: .98; }
+.package-card > p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.package-card--violet > p { color: rgba(255,255,255,.72); }
+.package-card ul { display: grid; gap: 12px; margin: 26px 0 30px; padding: 22px 0 0 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; line-height: 1.45; }
+.package-card--violet ul { border-color: rgba(255,255,255,.2); color: rgba(255,255,255,.8); }
+.package-card .button { align-self: flex-start; margin-top: auto; }
+.package-card--violet .button--light:hover { background: var(--blue); }
+.package-notes { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; align-items: start; }
+.package-note-list { border-top: 1px solid var(--line); }
+.package-note-list > div { padding: 20px 0; border-bottom: 1px solid var(--line); }
+.package-note-list b { font-family: 'Space Grotesk', sans-serif; font-size: 18px; }
+.package-note-list p { margin: 8px 0 0; color: var(--muted); line-height: 1.6; }
+.faq-layout { display: grid; grid-template-columns: .72fr 1.28fr; gap: 80px; align-items: start; }
+.faq-intro { position: sticky; top: 30px; }
+.faq-intro .copy { margin: 22px 0 26px; }
+.faq-list { border-top: 1px solid var(--line); }
+.faq-list details { border-bottom: 1px solid var(--line); }
+.faq-list summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 0; cursor: pointer; list-style: none; font-family: 'Space Grotesk', sans-serif; font-size: clamp(19px, 2.5vw, 27px); font-weight: 600; letter-spacing: -.035em; }
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after { content: '+'; flex: 0 0 auto; color: var(--violet); font-family: 'DM Sans', sans-serif; font-size: 26px; font-weight: 400; }
+.faq-list details[open] summary::after { content: '−'; }
+.faq-list details p { max-width: 680px; margin: -5px 44px 25px 0; color: var(--muted); line-height: 1.7; }
+.selected-package-note { margin-top: 28px; padding: 16px; border-left: 2px solid var(--violet); background: var(--paper-2); color: var(--ink); font-size: 13px; line-height: 1.5; }
+.selected-package-note b { display: block; margin-bottom: 5px; font-family: 'Space Grotesk', sans-serif; }
+@media (max-width: 900px) {
+  .package-grid, .package-notes, .faq-layout { grid-template-columns: 1fr; gap: 32px; }
+  .package-card { min-height: 0; }
+  .package-card h2 { margin-top: 40px; }
+  .faq-intro { position: static; }
+}
+@media (max-width: 640px) {
+  .package-card { padding: 23px; }
+  .faq-list summary { padding: 20px 0; font-size: 20px; }
+  .faq-list details p { margin-right: 30px; }
+}
