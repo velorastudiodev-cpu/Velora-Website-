@@ -373,3 +373,35 @@
     card.setAttribute('role', 'button');
   });
 })();
+
+/* ============================================================
+   REFRESHED PROJECT PREVIEWS — lightweight interactions
+   ============================================================ */
+(function () {
+  var tabs = document.querySelectorAll('[data-dashboard-tab]');
+  if (tabs.length) {
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var name = tab.dataset.dashboardTab;
+        tabs.forEach(function (item) { item.classList.toggle('is-active', item === tab); });
+        document.querySelectorAll('[data-dashboard-panel]').forEach(function (panel) {
+          panel.classList.toggle('is-active', panel.dataset.dashboardPanel === name);
+        });
+        var heading = document.querySelector('[data-dashboard-heading]');
+        var headings = { overview: 'Good afternoon, Ikbar.', calendar: 'Your day, in rhythm.', clients: 'People behind every visit.', content: 'Keep the story moving.' };
+        if (heading) heading.textContent = headings[name] || headings.overview;
+        track('dashboard_preview_tab', { tab: name });
+      });
+    });
+  }
+  var ranges = document.querySelectorAll('[data-dashboard-range]');
+  ranges.forEach(function (range) {
+    range.addEventListener('click', function () {
+      ranges.forEach(function (item) { item.classList.toggle('is-active', item === range); });
+      track('dashboard_preview_range', { range: range.dataset.dashboardRange });
+    });
+  });
+  document.querySelectorAll('[data-maha-preview]').forEach(function (link) {
+    link.addEventListener('click', function (event) { event.stopPropagation(); });
+  });
+})();

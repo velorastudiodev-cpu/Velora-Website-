@@ -30,3 +30,9 @@
 ## Required before public lead operations
 
 No database, notification provider, or auth credentials were supplied. A signed native APK is also not generated; Android installation is provided through the PWA install flow. The form intentionally does not claim success without `/api/leads`. Add a server endpoint with server validation, persistent storage using `schema.sql`, rate limiting, notification isolation, protected lead/content console, and retention/deletion procedures. Configure names in `.env.example`; never commit values.
+
+### Mahakarya refresh (2026-10-22)
+
+- Added `/mahakarya/ikbar-dashboard/` as an interactive redesign direction for the Ikbar admin surface: overview metrics, animated activity chart, schedule panel, range controls, and accessible navigation tabs.
+- Added `/mahakarya/dzikri-mount-guide/` as an editorial redesign direction for Dzikri Mount Guide: layered mountain hero, route/service cards, WhatsApp booking actions, and motion that respects `prefers-reduced-motion`.
+- Refreshed the Mahakarya cards with animated dashboard and mountain previews. Existing client live URLs remain available from each card and preview page; the new routes are clearly labelled as design previews with sample UI data.
