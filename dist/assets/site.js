@@ -8,6 +8,25 @@
   const track = function (name, metadata) {
     if (typeof window.veloraTrack === 'function') window.veloraTrack(name, metadata || {});
   };
+  let deferredInstallPrompt = null;
+  const installButton = document.querySelector('[data-pwa-install]');
+  window.addEventListener('beforeinstallprompt', function (event) {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    if (installButton) installButton.hidden = false;
+  });
+  if (installButton) installButton.addEventListener('click', async function () {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    const choice = await deferredInstallPrompt.userChoice;
+    track('pwa_install_prompt', { outcome: choice.outcome });
+    deferredInstallPrompt = null;
+    installButton.hidden = true;
+  });
+  window.addEventListener('appinstalled', function () {
+    track('pwa_installed');
+    if (installButton) installButton.hidden = true;
+  });
   if (menuToggle && nav) {
     menuToggle.addEventListener('click', function () {
       const open = nav.classList.toggle('is-open');

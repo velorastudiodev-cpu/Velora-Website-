@@ -651,3 +651,6 @@ button { cursor: pointer; }
   .maha-modal { max-height: 92dvh; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
   .maha-view-btn .maha-btn-label { display: none; }
 }
+.pwa-install-button { align-self: start; min-height: 38px; padding: 0 14px; border: 1px solid rgba(255,255,255,.24); border-radius: 999px; background: transparent; color: var(--white); font-size: 12px; font-weight: 700; }
+.pwa-install-button:hover { border-color: var(--blue); color: var(--blue); }
+@media (max-width: 640px) { .pwa-install-button { margin-top: 16px; } }

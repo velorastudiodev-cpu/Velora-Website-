@@ -11,7 +11,7 @@
 - Inquiry UI includes required fields, optional selected package/reference URL/additional context, inline validation, accessible status messaging, honeypot, loading state, package prefill, and honest unavailable-endpoint failure.
 - Portfolio category filters, CTA routing, mobile menu, metadata, canonical tags, sitemap/robots, and an analytics integration point that does not receive form contents are included.
 - Revised PRD, asset README, mindmap references, and supplied logo references are preserved under the repository root and `assets/revised/`.
-- PWA install support includes a manifest, official logo based icons, service worker cache, and Android shortcut to the inquiry form.
+- PWA install support includes a manifest, official logo based icons, service worker cache, Android shortcut to the inquiry form, and an optional browser install prompt.
 
 ## Verification
 
