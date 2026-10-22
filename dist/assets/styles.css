@@ -374,3 +374,278 @@ button { cursor: pointer; }
   .faq-list summary { padding: 20px 0; font-size: 20px; }
   .faq-list details p { margin-right: 30px; }
 }
+
+/* ============================================================
+   MAHAKARYA — Real Client Work Showcase
+   ============================================================ */
+.mahakarya-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 18px;
+}
+.maha-card {
+  position: relative;
+  grid-column: span 4;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: var(--white);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.maha-card:hover { transform: translateY(-6px); box-shadow: 0 32px 72px rgba(17,16,32,.13); }
+.maha-card--featured { grid-column: span 8; }
+
+/* Thumbnail */
+.maha-thumb {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--ink);
+}
+.maha-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top;
+  display: block;
+  transition: transform .5s ease;
+}
+.maha-card:hover .maha-thumb img { transform: scale(1.04); }
+.maha-thumb-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ink-soft);
+  flex-direction: column; gap: 16px;
+}
+.maha-badge {
+  position: absolute; top: 12px; left: 12px;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(17,16,32,.75); backdrop-filter: blur(8px);
+  color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+}
+.maha-badge--client { background: rgba(65,54,195,.92); }
+.maha-hint {
+  position: absolute; bottom: 12px; right: 12px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 999px;
+  background: rgba(255,255,255,.18); backdrop-filter: blur(10px);
+  color: #fff; font-size: 11px; font-weight: 600;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity .2s, transform .2s;
+}
+.maha-card:hover .maha-hint { opacity: 1; transform: none; }
+
+/* Card body */
+.maha-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+.maha-meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+.maha-category { color: var(--violet); font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding-top: 2px; }
+.maha-stack { display: flex; flex-wrap: wrap; gap: 4px; }
+.maha-tag { padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-size: 10px; font-weight: 600; }
+.maha-title { margin: 0 0 8px; font-family: 'Space Grotesk', sans-serif; font-size: clamp(19px, 2.4vw, 26px); letter-spacing: -.04em; line-height: 1.02; }
+.maha-desc { margin: 0 0 14px; color: var(--muted); font-size: 13px; line-height: 1.6; flex: 1; }
+.maha-footer {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line);
+}
+.maha-client-label { color: var(--muted); font-size: 11px; }
+.maha-client-label b { display: block; color: var(--ink); font-size: 13px; margin-top: 2px; }
+.maha-cta-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--violet); color: #fff; font-size: 16px; flex-shrink: 0;
+  transition: background .2s, transform .2s;
+}
+.maha-card:hover .maha-cta-icon { background: var(--indigo); transform: scale(1.1); }
+
+/* ============================================================
+   MAHAKARYA MODAL
+   ============================================================ */
+.maha-modal-backdrop {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(17,16,32,.85); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+.maha-modal-backdrop.is-open { opacity: 1; pointer-events: auto; }
+.maha-modal {
+  position: relative; width: 100%; max-width: 1060px;
+  max-height: calc(100dvh - 40px);
+  display: flex; flex-direction: column;
+  border-radius: var(--radius-lg); background: var(--paper);
+  box-shadow: 0 40px 100px rgba(0,0,0,.45);
+  overflow: hidden;
+  transform: translateY(28px) scale(.96);
+  transition: transform .38s cubic-bezier(.22,.84,.44,1);
+}
+.maha-modal-backdrop.is-open .maha-modal { transform: none; }
+
+/* Header */
+.maha-modal-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px; border-bottom: 1px solid var(--line); flex-shrink: 0;
+}
+.maha-modal-title-wrap { min-width: 0; flex: 1; }
+.maha-modal-label { color: var(--violet); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.maha-modal-title { margin: 3px 0 0; font-family: 'Space Grotesk', sans-serif; font-size: 20px; letter-spacing: -.04em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.maha-view-toggle { display: inline-flex; border-radius: 999px; border: 1px solid var(--line); background: var(--paper-2); overflow: hidden; flex-shrink: 0; }
+.maha-view-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 6px 13px; border: 0; background: transparent;
+  color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: background .18s, color .18s;
+}
+.maha-view-btn[aria-pressed="true"] { background: var(--violet); color: #fff; }
+.maha-view-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
+.maha-modal-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.maha-modal-livelink {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 34px; padding: 0 13px; border-radius: 999px;
+  background: var(--ink); color: #fff; font-size: 11px; font-weight: 600;
+  transition: background .18s;
+}
+.maha-modal-livelink:hover { background: var(--violet); }
+.maha-modal-close {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--line); background: transparent; color: var(--ink);
+  font-size: 19px; cursor: pointer; transition: background .18s, color .18s;
+}
+.maha-modal-close:hover { background: var(--ink); color: #fff; }
+
+/* Viewer area */
+.maha-modal-body { flex: 1; overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
+.maha-viewer { flex: 1; overflow: hidden; display: flex; flex-direction: column; background: #1a1829; }
+
+/* Browser bar */
+.maha-browser-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 14px; background: #252238; flex-shrink: 0;
+}
+.maha-win-dots { display: flex; gap: 5px; }
+.maha-win-dots span { width: 9px; height: 9px; border-radius: 50%; }
+.maha-win-dots span:nth-child(1) { background: #ff5f57; }
+.maha-win-dots span:nth-child(2) { background: #febc2e; }
+.maha-win-dots span:nth-child(3) { background: #28c840; }
+.maha-url-bar {
+  flex: 1; padding: 4px 10px; border-radius: 6px;
+  background: rgba(255,255,255,.08); color: rgba(255,255,255,.55);
+  font-size: 11px; font-family: monospace;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Screenshot carousel section */
+.maha-carousel-section { flex: 1; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+.maha-carousel-section[data-mode="mobile"] {
+  align-items: center; justify-content: center; background: #252238; flex-direction: row;
+}
+.maha-carousel-section[data-mode="mobile"] .maha-browser-bar { display: none; }
+
+/* Track wrap */
+.maha-track-wrap {
+  flex: 1; overflow: hidden; position: relative;
+  touch-action: pan-y;
+}
+.maha-carousel-section[data-mode="desktop"] .maha-track-wrap {
+  overflow-y: auto; overflow-x: hidden; max-height: 420px;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.2) transparent;
+}
+.maha-carousel-section[data-mode="mobile"] .maha-track-wrap {
+  touch-action: pan-x;
+  width: 258px; height: 480px; flex: none;
+  border: 8px solid #2e2c45; border-radius: 34px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.55), inset 0 0 0 2px rgba(255,255,255,.07);
+  overflow: hidden; background: #2e2c45;
+}
+.maha-track {
+  display: flex; height: 100%;
+  transition: transform .42s cubic-bezier(.32,.85,.44,1);
+  will-change: transform;
+}
+.maha-slide { flex: 0 0 100%; overflow: hidden; }
+.maha-slide img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; user-select: none; -webkit-user-drag: none; }
+.maha-carousel-section[data-mode="desktop"] .maha-track { flex-direction: column; height: auto; transition: none; }
+.maha-carousel-section[data-mode="desktop"] .maha-slide { flex: none; width: 100%; height: auto; }
+.maha-carousel-section[data-mode="desktop"] .maha-slide img { height: auto; object-fit: contain; }
+.maha-carousel-section[data-mode="mobile"] .maha-track { height: 100%; }
+.maha-carousel-section[data-mode="mobile"] .maha-slide { height: 100%; }
+
+/* Iframe mode */
+.maha-iframe-section { display: none; flex: 1; flex-direction: column; background: #1a1829; }
+.maha-iframe-section.is-active { display: flex; }
+.maha-iframe-body { flex: 1; position: relative; }
+.maha-iframe-body iframe { width: 100%; height: 100%; border: 0; display: block; }
+.maha-iframe-section[data-mode="mobile"] .maha-iframe-body {
+  display: flex; align-items: center; justify-content: center;
+  background: #252238; padding: 16px;
+}
+.maha-iframe-phone {
+  width: 258px; height: 480px;
+  border: 8px solid #2e2c45; border-radius: 34px;
+  overflow: hidden; flex-shrink: 0;
+  box-shadow: 0 20px 60px rgba(0,0,0,.55);
+}
+.maha-iframe-phone iframe { width: 390px; height: 480px; transform: scale(0.661); transform-origin: top left; border: 0; display: block; }
+
+/* Controls bar */
+.maha-ctrl-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 18px; background: rgba(17,16,32,.9); flex-shrink: 0;
+}
+.maha-carousel-section[data-mode="desktop"] ~ .maha-ctrl-bar { display: none; }
+.maha-dots { display: flex; gap: 6px; align-items: center; }
+.maha-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,.3); border: 0; padding: 0; cursor: pointer;
+  transition: background .18s, transform .18s;
+}
+.maha-dot.is-active { background: #fff; transform: scale(1.3); }
+.maha-nav-btns { display: flex; gap: 7px; }
+.maha-nav-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.08);
+  color: #fff; font-size: 15px; cursor: pointer;
+  transition: background .18s;
+}
+.maha-nav-btn:hover { background: rgba(255,255,255,.2); }
+
+/* Progress bar */
+.maha-prog { height: 2px; background: rgba(255,255,255,.12); flex-shrink: 0; }
+.maha-prog-fill { height: 100%; background: var(--violet); width: 0%; }
+.maha-prog-fill.is-run { width: 100%; transition: width 4s linear; }
+
+/* Modal footer */
+.maha-modal-footer {
+  padding: 14px 20px; border-top: 1px solid var(--line);
+  display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center;
+  flex-shrink: 0; background: var(--white);
+}
+.maha-detail-item { display: flex; flex-direction: column; gap: 1px; }
+.maha-detail-label { color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; }
+.maha-detail-value { font-size: 13px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+.maha-detail-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 3px; }
+.maha-detail-workflow { color: var(--muted); font-size: 12px; line-height: 1.5; max-width: 500px; }
+
+@media (max-width: 1024px) {
+  .maha-card--featured { grid-column: span 12; }
+  .maha-card { grid-column: span 6; }
+}
+@media (max-width: 768px) {
+  .maha-card, .maha-card--featured { grid-column: span 12; }
+  .maha-modal { max-height: 96dvh; border-radius: var(--radius-md); }
+  .maha-modal-header { padding: 12px 14px; flex-wrap: wrap; gap: 10px; }
+  .maha-modal-title { font-size: 16px; }
+  .maha-modal-footer { padding: 12px 14px; }
+  .maha-carousel-section[data-mode="desktop"] .maha-track-wrap { max-height: 260px; }
+  .maha-carousel-section[data-mode="mobile"] .maha-track-wrap { width: 200px; height: 380px; }
+  .maha-iframe-phone { width: 200px; height: 380px; }
+  .maha-iframe-phone iframe { transform: scale(0.513); }
+}
+@media (max-width: 480px) {
+  .maha-modal-backdrop { padding: 0; align-items: flex-end; }
+  .maha-modal { max-height: 92dvh; border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
+  .maha-view-btn .maha-btn-label { display: none; }
+}

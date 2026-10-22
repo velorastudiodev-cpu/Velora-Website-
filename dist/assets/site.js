@@ -100,3 +100,246 @@
     });
   }
 })();
+
+/* ============================================================
+   MAHAKARYA MODAL — fully self-contained
+   ============================================================ */
+(function () {
+  var backdrop = document.querySelector('.maha-modal-backdrop');
+  if (!backdrop) return;
+
+  var modal        = backdrop.querySelector('.maha-modal');
+  var closeBtn     = backdrop.querySelector('.maha-modal-close');
+  var labelEl      = backdrop.querySelector('.maha-modal-label');
+  var titleEl      = backdrop.querySelector('.maha-modal-title');
+  var liveLink     = backdrop.querySelector('.maha-modal-livelink');
+  var viewToggle   = backdrop.querySelectorAll('.maha-view-btn');
+  var urlBar       = backdrop.querySelector('.maha-url-bar');
+  var browserBar   = backdrop.querySelector('.maha-browser-bar');
+  var carouselSec  = backdrop.querySelector('.maha-carousel-section');
+  var iframeSec    = backdrop.querySelector('.maha-iframe-section');
+  var track        = backdrop.querySelector('.maha-track');
+  var ctrlBar      = backdrop.querySelector('.maha-ctrl-bar');
+  var dotsWrap     = backdrop.querySelector('.maha-dots');
+  var prevBtn      = backdrop.querySelector('.maha-nav-btn[data-dir="-1"]');
+  var nextBtn      = backdrop.querySelector('.maha-nav-btn[data-dir="1"]');
+  var progFill     = backdrop.querySelector('.maha-prog-fill');
+  var iframeBody   = backdrop.querySelector('.maha-iframe-body');
+  var footerEl     = backdrop.querySelector('.maha-modal-footer');
+
+  var currentProject = null;
+  var currentSlide   = 0;
+  var autoTimer      = null;
+  var currentView    = 'desktop'; // 'desktop' | 'mobile'
+  var currentTab     = 'screenshots'; // 'screenshots' | 'live'
+
+  // Build dots
+  function buildDots(n) {
+    dotsWrap.innerHTML = '';
+    for (var i = 0; i < n; i++) {
+      var d = document.createElement('button');
+      d.className = 'maha-dot' + (i === 0 ? ' is-active' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i + 1));
+      d.dataset.idx = i;
+      d.addEventListener('click', function (e) { goTo(+e.currentTarget.dataset.idx); });
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function updateDots(idx) {
+    dotsWrap.querySelectorAll('.maha-dot').forEach(function (d, i) {
+      d.classList.toggle('is-active', i === idx);
+    });
+  }
+
+  function goTo(idx) {
+    if (!currentProject) return;
+    var slides = currentProject.slides || [];
+    if (!slides.length) return;
+    currentSlide = (idx + slides.length) % slides.length;
+    if (currentView === 'mobile') {
+      track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    }
+    updateDots(currentSlide);
+    restartAuto();
+  }
+
+  function restartAuto() {
+    clearTimeout(autoTimer);
+    if (!progFill) return;
+    progFill.classList.remove('is-run');
+    void progFill.offsetWidth; // reflow
+    if (currentView === 'mobile' && currentTab === 'screenshots') {
+      progFill.classList.add('is-run');
+      autoTimer = setTimeout(function () { goTo(currentSlide + 1); }, 4000);
+    }
+  }
+
+  function applyView(view) {
+    currentView = view;
+    viewToggle.forEach(function (btn) {
+      btn.setAttribute('aria-pressed', btn.dataset.view === view ? 'true' : 'false');
+    });
+    carouselSec.setAttribute('data-mode', view);
+    iframeSec.setAttribute('data-mode', view);
+    if (browserBar) browserBar.style.display = view === 'desktop' ? '' : 'none';
+    if (ctrlBar) ctrlBar.style.display = view === 'mobile' ? '' : 'none';
+
+    // Reset track position for mobile
+    if (view === 'mobile') {
+      track.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+    } else {
+      track.style.transform = '';
+    }
+    restartAuto();
+  }
+
+  function applyTab(tab) {
+    currentTab = tab;
+    if (tab === 'live') {
+      carouselSec.style.display = 'none';
+      if (ctrlBar) ctrlBar.style.display = 'none';
+      iframeSec.classList.add('is-active');
+      clearTimeout(autoTimer);
+      if (progFill) { progFill.classList.remove('is-run'); }
+    } else {
+      carouselSec.style.display = '';
+      iframeSec.classList.remove('is-active');
+      applyView(currentView);
+    }
+  }
+
+  function loadProject(project) {
+    currentProject = project;
+    currentSlide = 0;
+
+    // Header
+    if (labelEl) labelEl.textContent = project.category || '';
+    if (titleEl) titleEl.textContent = project.title || '';
+    if (urlBar) urlBar.textContent = project.liveUrl ? project.liveUrl.replace('https://', '') : '';
+
+    // Live link
+    if (liveLink) {
+      liveLink.href = project.liveUrl || '#';
+      liveLink.target = '_blank';
+      liveLink.rel = 'noopener';
+      liveLink.querySelector('span').textContent = 'Live ↗';
+      // Switch to iframe tab when clicking
+      liveLink.onclick = function (e) {
+        e.preventDefault();
+        applyTab('live');
+        // Load iframe lazily
+        var existingIframe = iframeBody.querySelector('iframe');
+        if (!existingIframe) {
+          var iframe = document.createElement('iframe');
+          iframe.src = project.liveUrl;
+          iframe.title = project.title + ' live preview';
+          iframe.loading = 'lazy';
+          iframe.sandbox = 'allow-scripts allow-same-origin allow-forms allow-popups';
+          var phoneWrap = iframeBody.querySelector('.maha-iframe-phone');
+          if (currentView === 'mobile' && phoneWrap) {
+            phoneWrap.innerHTML = '';
+            phoneWrap.appendChild(iframe);
+          } else {
+            iframeBody.appendChild(iframe);
+          }
+        }
+      };
+    }
+
+    // Build slides
+    var slides = project.slides || [];
+    track.innerHTML = slides.map(function (src) {
+      return '<div class="maha-slide"><img src="' + src + '" alt="" loading="lazy"></div>';
+    }).join('');
+    buildDots(slides.length);
+
+    // Footer details
+    if (footerEl) {
+      footerEl.innerHTML =
+        '<div class="maha-detail-item"><span class="maha-detail-label">Client</span><span class="maha-detail-value">' + (project.client || '—') + '</span></div>' +
+        '<div class="maha-detail-item"><span class="maha-detail-label">Stack</span><div class="maha-detail-tags">' +
+        (project.tags || []).map(function (t) { return '<span class="maha-tag">' + t + '</span>'; }).join('') +
+        '</div></div>' +
+        '<div class="maha-detail-item maha-detail-workflow"><span class="maha-detail-label">Workflow</span>' + (project.workflow || '') + '</div>';
+    }
+
+    // Reset iframe
+    if (iframeBody) iframeBody.innerHTML = '';
+    iframeSec.classList.remove('is-active');
+    carouselSec.style.display = '';
+
+    applyView('desktop'); // always start in desktop mode
+    applyTab('screenshots');
+  }
+
+  // Open / close
+  function openModal(project) {
+    loadProject(project);
+    backdrop.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeModal() {
+    backdrop.classList.remove('is-open');
+    document.body.style.overflow = '';
+    clearTimeout(autoTimer);
+    if (progFill) progFill.classList.remove('is-run');
+    // Destroy iframe to stop playback
+    if (iframeBody) iframeBody.innerHTML = '';
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', function (e) { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && backdrop.classList.contains('is-open')) closeModal(); });
+
+  // View toggle
+  viewToggle.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      applyView(btn.dataset.view);
+      if (currentTab === 'live') {
+        iframeSec.setAttribute('data-mode', btn.dataset.view);
+        // re-place iframe
+        var existingIframe = iframeBody.querySelector('iframe');
+        if (existingIframe) {
+          var phoneWrap = iframeBody.querySelector('.maha-iframe-phone');
+          if (btn.dataset.view === 'mobile' && phoneWrap) {
+            phoneWrap.innerHTML = '';
+            phoneWrap.appendChild(existingIframe);
+          } else if (btn.dataset.view === 'desktop') {
+            iframeBody.appendChild(existingIframe);
+          }
+        }
+      }
+    });
+  });
+
+  // Prev / Next
+  if (prevBtn) prevBtn.addEventListener('click', function () { goTo(currentSlide - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { goTo(currentSlide + 1); });
+
+  // Touch swipe (mobile mode)
+  var touchStartX = 0;
+  var trackWrap = backdrop.querySelector('.maha-track-wrap');
+  if (trackWrap) {
+    trackWrap.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    trackWrap.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { goTo(currentSlide + (dx < 0 ? 1 : -1)); }
+    }, { passive: true });
+  }
+
+  // Wire up cards
+  document.querySelectorAll('[data-maha-open]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var key = card.dataset.mahaOpen;
+      var project = window.mahaProjects && window.mahaProjects[key];
+      if (project) openModal(project);
+    });
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+  });
+})();
