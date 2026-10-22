@@ -1,0 +1,7 @@
+{
+  "installCommand": "echo 'no deps'",
+  "buildCommand": "node build.mjs",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": true
+}

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
-Sitemap: https://velora-studio.privgpwow.chatgpt.site/sitemap.xml
+Sitemap: https://velora-website-official.vercel.app/sitemap.xml
