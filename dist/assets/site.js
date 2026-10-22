@@ -1,4 +1,7 @@
 (function () {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () { navigator.serviceWorker.register('/sw.js').catch(function () {}); });
+  }
   const body = document.body;
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const nav = document.querySelector('[data-nav]');

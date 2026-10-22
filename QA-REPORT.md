@@ -20,3 +20,10 @@ Playwright Chromium was run against the local static preview at `http://127.0.0.
 - Screenshots reviewed: `qa/revised-form-390.png` and `qa/revised-paket-1440.png` (captured from the local preview; below-fold reveal sections were also checked after scrolling).
 
 The local preview used the browser binary downloaded for this QA run. The published Site is static and does not yet include a lead API, database, email provider, or protected admin console because no credentials were configured.
+
+## Android installability
+
+- Manifest: `/manifest.webmanifest` returns 200 and declares standalone display, theme/background colors, 192 px and 512 px icons, and a `Mulai proyek` shortcut.
+- Icons: `/assets/pwa/icon-192.png` and `/assets/pwa/icon-512.png` return 200 as PNG files.
+- Service worker: `/sw.js` returns 200 and registers successfully in Chromium on the local preview.
+- No browser page errors occurred during the PWA check.

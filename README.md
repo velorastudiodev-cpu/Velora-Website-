@@ -27,3 +27,7 @@ The public form posts to `/api/leads`. This build intentionally does not fake pe
 - `IMPLEMENTATION-REPORT.md` records implementation and limitations.
 - `QA-REPORT.md` records browser checks and screenshots under `qa/`.
 - `README-ASSETS.md` and `README-ASSETS-REVISI.md` document source assets.
+
+## Install on Android
+
+The published site is a Progressive Web App. Open the production URL in Chrome on Android, wait for the page to load, then choose **Install app** or **Add to Home screen** from the browser menu. The app opens in standalone mode with the Velora icon; its “Mulai proyek” shortcut opens the inquiry form. A basic service worker caches the shell and visited pages for repeat visits. A signed APK is not generated because Android signing credentials and a native wrapper were not part of the supplied project.

@@ -11,6 +11,7 @@
 - Inquiry UI includes required fields, optional selected package/reference URL/additional context, inline validation, accessible status messaging, honeypot, loading state, package prefill, and honest unavailable-endpoint failure.
 - Portfolio category filters, CTA routing, mobile menu, metadata, canonical tags, sitemap/robots, and an analytics integration point that does not receive form contents are included.
 - Revised PRD, asset README, mindmap references, and supplied logo references are preserved under the repository root and `assets/revised/`.
+- PWA install support includes a manifest, official logo based icons, service worker cache, and Android shortcut to the inquiry form.
 
 ## Verification
 
@@ -18,6 +19,7 @@
 - `node --check build.mjs` passed.
 - `node --check src/site.js` passed.
 - Playwright Chromium QA is rerun after this revision; results are recorded in `QA-REPORT.md`.
+- PWA check passed: manifest, icons, service worker, and registration all returned successfully.
 
 ## Deployment
 
@@ -27,4 +29,4 @@
 
 ## Required before public lead operations
 
-No database, notification provider, or auth credentials were supplied. The form intentionally does not claim success without `/api/leads`. Add a server endpoint with server validation, persistent storage using `schema.sql`, rate limiting, notification isolation, protected lead/content console, and retention/deletion procedures. Configure names in `.env.example`; never commit values.
+No database, notification provider, or auth credentials were supplied. A signed native APK is also not generated; Android installation is provided through the PWA install flow. The form intentionally does not claim success without `/api/leads`. Add a server endpoint with server validation, persistent storage using `schema.sql`, rate limiting, notification isolation, protected lead/content console, and retention/deletion procedures. Configure names in `.env.example`; never commit values.
