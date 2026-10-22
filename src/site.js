@@ -276,6 +276,9 @@
   // Open / close
   function openModal(project) {
     loadProject(project);
+    backdrop.style.display = 'flex';
+    // Force reflow so transition plays
+    void backdrop.offsetWidth;
     backdrop.classList.add('is-open');
     document.body.style.overflow = 'hidden';
     if (closeBtn) closeBtn.focus();
@@ -285,6 +288,11 @@
     document.body.style.overflow = '';
     clearTimeout(autoTimer);
     if (progFill) progFill.classList.remove('is-run');
+    // Hide after transition ends
+    backdrop.addEventListener('transitionend', function hide() {
+      if (!backdrop.classList.contains('is-open')) backdrop.style.display = 'none';
+      backdrop.removeEventListener('transitionend', hide);
+    });
     // Destroy iframe to stop playback
     if (iframeBody) iframeBody.innerHTML = '';
   }

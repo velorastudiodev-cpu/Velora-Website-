@@ -517,7 +517,7 @@ button { cursor: pointer; }
 
 /* Viewer area */
 .maha-modal-body { flex: 1; overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
-.maha-viewer { flex: 1; overflow: hidden; display: flex; flex-direction: column; background: #1a1829; }
+.maha-viewer { flex: 1; overflow: hidden; display: flex; flex-direction: column; background: #1a1829; min-height: 0; }
 
 /* Browser bar */
 .maha-browser-bar {
@@ -537,7 +537,7 @@ button { cursor: pointer; }
 }
 
 /* Screenshot carousel section */
-.maha-carousel-section { flex: 1; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+.maha-carousel-section { flex: 1; overflow: hidden; display: flex; flex-direction: column; position: relative; min-height: 0; }
 .maha-carousel-section[data-mode="mobile"] {
   align-items: center; justify-content: center; background: #252238; flex-direction: row;
 }
@@ -545,11 +545,11 @@ button { cursor: pointer; }
 
 /* Track wrap */
 .maha-track-wrap {
-  flex: 1; overflow: hidden; position: relative;
+  flex: 1; overflow: hidden; position: relative; min-height: 0;
   touch-action: pan-y;
 }
 .maha-carousel-section[data-mode="desktop"] .maha-track-wrap {
-  overflow-y: auto; overflow-x: hidden; max-height: 420px;
+  overflow-y: auto; overflow-x: hidden;
   scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.2) transparent;
 }
 .maha-carousel-section[data-mode="mobile"] .maha-track-wrap {
@@ -569,8 +569,10 @@ button { cursor: pointer; }
 .maha-carousel-section[data-mode="desktop"] .maha-track { flex-direction: column; height: auto; transition: none; }
 .maha-carousel-section[data-mode="desktop"] .maha-slide { flex: none; width: 100%; height: auto; }
 .maha-carousel-section[data-mode="desktop"] .maha-slide img { height: auto; object-fit: contain; }
+/* Mobile: show full portrait screenshot without cropping */
 .maha-carousel-section[data-mode="mobile"] .maha-track { height: 100%; }
 .maha-carousel-section[data-mode="mobile"] .maha-slide { height: 100%; }
+.maha-carousel-section[data-mode="mobile"] .maha-slide img { object-fit: contain; object-position: top; background: #1a1829; }
 
 /* Iframe mode */
 .maha-iframe-section { display: none; flex: 1; flex-direction: column; background: #1a1829; }
