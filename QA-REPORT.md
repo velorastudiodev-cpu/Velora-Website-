@@ -1,37 +1,30 @@
-# Velora Studio QA report
+# Velora Studio v2.0 — QA & Responsive Verification Report
 
-Date: 2026-10-22 UTC
+Date: 2026-10-23
 
-## Browser verification
+## Automated Playwright Multi-Viewport & E2E Suite (`qa/verify-responsive.mjs`)
 
-Playwright Chromium was run against the local static preview at `http://127.0.0.1:4173` after the revised PRD implementation.
+Playwright Chromium was executed against the Next.js 15 production server (`next build` -> `next start`).
 
-- Routes checked: 15 public routes, including `/paket/` and `/faq/`, plus the Mahakarya client work section and detail modal.
-- Viewports checked: 360, 390, 768, 1024, and 1440 px.
-- Page visits checked: 75 (15 routes × 5 widths).
-- Horizontal overflow: none at all checked widths.
-- Browser console/page errors: none during route checks.
-- Mobile menu: opens with `aria-expanded="true"`, closes on navigation, and preserves the CTA route.
-- Portfolio filter: category filter hides unrelated work and keeps matching work visible.
-- Package prefill: `/mulai-proyek/?paket=aplikasi-web` selects the package and shows a visible context note.
-- FAQ: native disclosure opens and exposes the answer content.
-- Inquiry form: required fields and `aria-invalid` errors appear; incomplete submissions are blocked.
-- Inquiry fallback: when `/api/leads` is unavailable, the UI states that nothing is considered sent and does not claim persistence.
-- Screenshots reviewed: `qa/revised-form-390.png` and `qa/revised-paket-1440.png` (captured from the local preview; below-fold reveal sections were also checked after scrolling).
+- **Routes verified (16)**: `/`, `/karya`, `/karya/ikbar-barbershop`, `/karya/ikbar-cms-dashboard`, `/karya/dzikri-mount-guide`, `/karya/ritme-operasi`, `/layanan`, `/layanan/website-bisnis`, `/paket`, `/proses`, `/tentang`, `/faq`, `/mulai-proyek`, `/privasi`, `/admin/login`, `/admin`.
+- **Viewports verified (5)**: `360px`, `390px`, `768px`, `1024px`, `1440px`.
+- **Total viewport visits**: **80** (`16 routes × 5 widths`).
+- **Horizontal overflow (`scrollWidth > innerWidth`)**: **0 failures**.
+- **Browser console errors**: **0**.
+- **Uncaught runtime page errors**: **0**.
+- **TypeScript (`npm run typecheck`)**: **0 errors**.
+- **Production build (`npm run build`)**: **29/29 routes compiled cleanly**.
 
-The local preview used the browser binary downloaded for this QA run. The published Site is static and does not yet include a lead API, database, email provider, or protected admin console because no credentials were configured.
+## End-to-End Interactive Checks Verified
 
-## Android installability
+1. **Mobile Navigation Drawer (`390px`)**: Opens with `aria-expanded="true"`, switches accessible label (`Buka` -> `Tutup menu navigasi`), renders high-contrast drawer links without horizontal overflow, and navigates cleanly to `/karya`.
+2. **Hero Architectural Workbench (`1440px`)**: Switches smoothly across Website Bisnis, Aplikasi Kerja, and Sistem Kustom tabs with `framer-motion` spring layout indicators (`MotionConfig reducedMotion="user"` enabled).
+3. **Client Project Inspector Modal (`1440px`)**: Opens dialog with crisp live production screenshots, toggles between `Desktop` (`16:10`) and `Mobile` (`9:19`) device frames, supports multi-screen pagination, and closes cleanly on `Escape`.
+4. **Live CMS & Operational Workflow Sandbox (`1440px`)**: Real-time brand/headline/CTA/accent/stock updates reflect immediately in the preview frame; Operational Workflow tab advances request statuses deterministically with audit history logs.
+5. **Portfolio Taxonomy Filter (`/karya`)**: Separates real live client deployments (`Proyek Klien · Production Live`) from internal studio architectural explorations (`Eksplorasi Konsep Internal`) with zero fake client claims.
+6. **Package Scope Explorer -> Project Brief Form (`/paket` -> `/mulai-proyek`)**: Carries selected tier query parameters (`?paket=...&layanan=...`) into the brief form, enforces Zod + `aria-invalid` validation on empty submit, and honestly reports database persistence status (offering one-click formatted brief copy when `SUPABASE_SERVICE_ROLE_KEY` is not yet configured, never faking a stored submission).
 
-- Manifest: `/manifest.webmanifest` returns 200 and declares standalone display, theme/background colors, 192 px and 512 px icons, and a `Mulai proyek` shortcut.
-- Icons: `/assets/pwa/icon-192.png` and `/assets/pwa/icon-512.png` return 200 as PNG files.
-- Service worker: `/sw.js` returns 200 and registers successfully in Chromium on the local preview.
-- No browser page errors occurred during the PWA check.
+## PWA & Android Installability
 
-## Android installability
-
-- Manifest: `/manifest.webmanifest` returns 200 and declares standalone display, theme/background colors, 192 px and 512 px icons, and a `Mulai proyek` shortcut.
-- Icons: `/assets/pwa/icon-192.png` and `/assets/pwa/icon-512.png` return 200 as PNG files.
-- Service worker: `/sw.js` returns 200 and registers successfully in Chromium on the local preview.
-- The optional `Pasang aplikasi` action uses the browser install prompt when Android Chrome exposes it; the browser menu remains available as a fallback.
-- No browser page errors occurred during the PWA check.
+- `/manifest.webmanifest` served via Next.js Metadata API (`src/app/manifest.ts`) with standalone display, `#0d0c18` background/theme color, `192x192` & `512x512` PNG icons, and `/mulai-proyek` shortcut.
+- `/sw.js` network-first safe service worker registered cleanly via `PwaInstallBanner.tsx`.

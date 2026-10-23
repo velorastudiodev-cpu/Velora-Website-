@@ -1,33 +1,36 @@
-# Velora Studio
+# Velora Studio v2.0 — Digital Solutions & Software Development
 
-Static public website foundation built from the supplied revised PRD, mindmap, and logo references. The revised package is preserved in `VELORA_STUDIO_PRD_REVISI.md` and `assets/revised/`; the supplied ZIP was used as input and is not recreated as an output artifact.
+Platform editorial dan konsultasi proyek Velora Studio berbasis **Next.js 15 App Router, React 19, TypeScript, Tailwind CSS v4, Framer Motion, Zod, dan Supabase PostgreSQL**.
 
-## Local preview
+## Fitur Utama
+
+- **Ritme Desain Editorial Anti-AI-Slop**: Komposisi arsitektural Dark/Light menggunakan identitas faset resmi Velora (`velora-symbol-isolated.png`), tipografi `Space Grotesk` + `Plus Jakarta Sans` + `JetBrains Mono`, dan koreografi Framer Motion yang menghormati `prefers-reduced-motion`.
+- **Pemisahan Jujur Portofolio (`/karya` & `/karya/[slug]`)**:
+  - **Proyek Klien Terverifikasi**: *Ikbar Barbershop*, *Ikbar CMS Dashboard*, dan *Dzikri Mount Guide* lengkap dengan jendela inspeksi perangkat Desktop/Mobile serta tautan live.
+  - **Eksplorasi & Prototipe Internal**: *Ritme Operasi*, *Katalog Bumi Rasa*, dan *Arus Kas* berlabel transparan tanpa klaim metrik fiktif.
+- **Interactive Live CMS & Workflow Sandbox (`/#simulasi`)**: Simulasi interaktif bagi pengunjung untuk merasakan langsung kemudahan Custom CMS mandiri dan pelacakan status operasional.
+- **Paket & Konfigurator Scope (`/paket` → `/mulai-proyek`)**: Eksplorasi arah paket dan modul fungsional yang otomatis melakukan *prefill* pada form brief.
+- **Backend Brief Tervalidasi (`POST /api/leads`) & Protected Admin (`/admin`)**: Validasi Zod di browser & server, honeypot anti-spam, pembatas laju IP, penyimpanan ke Supabase PostgreSQL (`schema.sql`), serta status jujur bila variabel database belum diatur.
+
+## Menjalankan Secara Lokal
 
 ```bash
-node build.mjs
-python3 -m http.server 4173 --directory dist
+npm install
+npm run dev
 ```
 
-Open `http://localhost:4173/`.
+Pemeriksaan tipe dan build produksi:
 
-## Public routes
+```bash
+npm run typecheck
+npm run build
+npm run start
+```
 
-`/`, `/layanan/`, `/layanan/website-bisnis/`, `/layanan/aplikasi-web/`, `/layanan/sistem-bisnis/`, `/karya/`, `/karya/ritme-operasi/`, `/karya/katalog-bumi-rasa/`, `/karya/arus-kas/`, `/proses/`, `/tentang/`, `/paket/`, `/mulai-proyek/`, `/faq/`, and `/privasi/`.
+## Konfigurasi Environment Produksi (`.env`)
 
-The package page uses consultation/estimate CTAs because approved public prices were not supplied. Package CTAs prefill the inquiry form using `?paket=website-bisnis`, `?paket=aplikasi-web`, or `?paket=sistem-bisnis`. FAQ is public and uses native accessible `details` disclosures; there is no fake chat history.
+Salin `.env.example` dan isi variabel berikut pada environment Vercel / server:
 
-## Lead backend blocker
-
-The public form posts to `/api/leads`. This build intentionally does not fake persistence because no database, email provider, or auth credentials were supplied. Configure a server endpoint using `.env.example` and `schema.sql`; keep secrets server-side and add protected admin access before enabling it in production. The schema includes leads plus the Phase 4 projects, packages, and FAQs tables for a future authenticated console.
-
-## Design and QA artifacts
-
-- `DESIGN-DECISIONS.md` records the editorial direction and revised feature decisions.
-- `IMPLEMENTATION-REPORT.md` records implementation and limitations.
-- `QA-REPORT.md` records browser checks and screenshots under `qa/`.
-- `README-ASSETS.md` and `README-ASSETS-REVISI.md` document source assets.
-
-## Install on Android
-
-The published site is a Progressive Web App. Open the production URL in Chrome on Android, wait for the page to load, then choose **Install app** or **Add to Home screen** from the browser menu. The app opens in standalone mode with the Velora icon; its “Mulai proyek” shortcut opens the inquiry form. A basic service worker caches the shell and visited pages for repeat visits. A signed APK is not generated because Android signing credentials and a native wrapper were not part of the supplied project.
+- `SUPABASE_URL` & `SUPABASE_SERVICE_ROLE_KEY`: Mengaktifkan penyimpanan brief ke tabel `public.leads` (jalankan `schema.sql` terlebih dahulu di Supabase SQL Editor).
+- `ADMIN_PASSCODE` (min. 8 karakter) & `ADMIN_SESSION_SECRET` (min. 16 karakter): Membuka konsol pengelola terproteksi di `/admin`.
+- `NEXT_PUBLIC_VELORA_EMAIL` & `NEXT_PUBLIC_VELORA_WHATSAPP` *(opsional)*: Menampilkan kanal kontak langsung resmi (sistem secara otomatis menolak nomor placeholder/dummy).

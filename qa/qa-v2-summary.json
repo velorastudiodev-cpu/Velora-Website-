@@ -1,0 +1,15 @@
+{
+  "checkedAt": "2026-10-23T15:24:38.676Z",
+  "totalViewportVisits": 80,
+  "overflowFailures": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "functionalChecks": [
+    "Mobile navigation drawer opens, renders cleanly, and routes to /karya",
+    "Hero architectural workbench switcher updates state via Framer Motion",
+    "Project Inspector Modal toggles Desktop/Mobile frame & closes on Escape",
+    "Live CMS & Workflow Sandbox updates preview and operational status deterministically",
+    "Portfolio gallery filters real client projects vs studio concepts accurately",
+    "Inquiry form validates inputs and handles unconfigured DB honestly without fake success"
+  ]
+}
