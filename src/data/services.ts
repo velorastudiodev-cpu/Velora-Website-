@@ -43,7 +43,7 @@ export const VELORA_SERVICES: VeloraService[] = [
       },
       {
         title: "Opsi Self-Service CMS Mandiri",
-        detail: "Bila konten Anda rutin berubah, kami siapkan panel pengelola khusus seperti pada ekosistem Ikbar Barbershop.",
+        detail: "Bila konten Anda rutin berubah, kami siapkan panel pengelola khusus seperti pada ekosistem Dinasti Barbershop.",
       },
       {
         title: "Fondasi SEO Teknis, Performa & Rilis",

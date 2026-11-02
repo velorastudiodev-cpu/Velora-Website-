@@ -86,11 +86,13 @@
 
 /* Subtle architectural grid texture for dark studio sections (zero blur blobs) */
 .studio-grid-dark {
-  background-color: var(--ink-canvas);
+  background-color: #120d2a;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 64px 64px;
+    radial-gradient(80% 120% at 88% 0%, rgba(124, 92, 255, 0.3), transparent 62%),
+    radial-gradient(60% 90% at 0% 100%, rgba(240, 166, 207, 0.12), transparent 60%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 64px 64px, 64px 64px;
 }
 
 .studio-grid-light {
@@ -106,4 +108,99 @@
   max-width: 1240px;
   margin-inline: auto;
   padding-inline: clamp(1.25rem, 4vw, 2.75rem);
+}
+
+/* ---------- Velora v3 (blueprint redesign) ---------- */
+.font-hero {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.font-serif-display {
+  font-family: "Instrument Serif", ui-serif, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.velora-shimmer-text {
+  background: linear-gradient(100deg, #ffffff 0%, #f3e8ff 30%, #ffd6ec 45%, #ffffff 55%, #e4dcff 80%, #ffffff 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: velora-shimmer 7s ease-in-out infinite;
+}
+
+.velora-shimmer-text span {
+  background: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@keyframes velora-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.velora-sheen {
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.85) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: velora-sheen 4.8s ease-in-out 2.2s infinite;
+}
+
+@keyframes velora-sheen {
+  0% { transform: translateX(-120%); }
+  28%, 100% { transform: translateX(120%); }
+}
+
+.velora-float {
+  animation: velora-float 7s ease-in-out infinite;
+}
+
+@keyframes velora-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -14px; }
+}
+
+.velora-cube {
+  animation: velora-cube 14s linear infinite;
+}
+
+@keyframes velora-cube {
+  from { transform: rotateX(-24deg) rotateY(0deg); }
+  to { transform: rotateX(-24deg) rotateY(360deg); }
+}
+
+.velora-outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1.4px rgba(214, 200, 255, 0.9);
+  background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 0) 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: velora-outline-sweep 6s ease-in-out infinite;
+}
+
+@keyframes velora-outline-sweep {
+  0% { background-position: 100% 50%; }
+  60%, 100% { background-position: 0% 50%; }
+}
+
+.velora-numeral {
+  background: linear-gradient(160deg, #c9bbff 0%, #9d87f5 40%, #f0c6e4 70%, #c9bbff 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: velora-shimmer 9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .velora-shimmer-text,
+  .velora-sheen,
+  .velora-float,
+  .velora-cube,
+  .velora-outline-text,
+  .velora-numeral {
+    animation: none;
+  }
 }

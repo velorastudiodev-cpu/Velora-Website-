@@ -7,7 +7,7 @@ import { KaryaFilterGallery } from "@/components/showcase/KaryaFilterGallery";
 export const metadata: Metadata = {
   title: "Galeri Karya & Eksplorasi Sistem",
   description:
-    "Kumpulan proyek klien terverifikasi (Ikbar Barbershop, Ikbar CMS Dashboard, Dzikri Mount Guide) serta eksplorasi konsep sistem bisnis Velora Studio.",
+    "Kumpulan proyek klien terverifikasi (Dinasti Barbershop, Dinasti Dashboard, Dzikri Mount Guide) serta eksplorasi konsep sistem bisnis Velora Studio.",
 };
 
 export default function KaryaPage() {

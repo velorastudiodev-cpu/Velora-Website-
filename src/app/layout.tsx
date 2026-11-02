@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import "@fontsource-variable/space-grotesk";
 import "@fontsource-variable/plus-jakarta-sans";
 import "@fontsource-variable/jetbrains-mono";
+import "@fontsource/instrument-serif/latin-400.css";
 import { PwaInstallBanner } from "@/components/layout/PwaInstallBanner";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";

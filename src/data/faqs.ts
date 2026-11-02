@@ -11,7 +11,7 @@ export const VELORA_FAQS: FaqItem[] = [
     category: "Layanan & Scope",
     question: "Apakah Velora Studio hanya mengerjakan website company profile, atau bisa sampai sistem internal?",
     answer:
-      "Keduanya. Kami mengerjakan mulai dari website bisnis yang fokus pada kejelasan penawaran dan konversi, aplikasi web dengan Custom CMS mandiri (seperti studi kasus Ikbar Barbershop + Dashboard), hingga sistem operasional khusus yang menyesuaikan alur kerja usaha Anda.",
+      "Keduanya. Kami mengerjakan mulai dari website bisnis yang fokus pada kejelasan penawaran dan konversi, aplikasi web dengan Custom CMS mandiri (seperti studi kasus Dinasti Barbershop + Dashboard), hingga sistem operasional khusus yang menyesuaikan alur kerja usaha Anda.",
   },
   {
     id: "kenapa-harga-tidak-dipukul-rata",
@@ -53,7 +53,7 @@ export const VELORA_FAQS: FaqItem[] = [
     category: "Layanan & Scope",
     question: "Apakah semua portofolio yang ditampilkan di situs ini merupakan proyek klien asli?",
     answer:
-      "Kami memisahkan secara transparan: Ikbar Barbershop, Ikbar CMS Dashboard, dan Dzikri Mount Guide adalah proyek klien nyata yang sudah berjalan di produksi. Adapun Ritme Operasi, Katalog Bumi Rasa, dan Arus Kas diberi label eksplisit Konsep / Demo Internal untuk memperlihatkan cara kami merancang sistem bisnis.",
+      "Kami memisahkan secara transparan: Dinasti Barbershop, Dinasti Dashboard, dan Dzikri Mount Guide adalah proyek klien nyata yang sudah berjalan di produksi. Adapun Ritme Operasi, Katalog Bumi Rasa, dan Arus Kas diberi label eksplisit Konsep / Demo Internal untuk memperlihatkan cara kami merancang sistem bisnis.",
   },
   {
     id: "serah-terima-dan-dukungan",

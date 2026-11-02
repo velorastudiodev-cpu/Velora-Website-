@@ -50,7 +50,7 @@ export const PACKAGE_DIRECTIONS: PackageDirection[] = [
     priceStatusLabel: "Estimasi setelah pemetaan alur & model data",
     summary:
       "Untuk bisnis yang ingin memperbarui isi website secara mandiri dari panel admin khusus, atau membutuhkan aplikasi web terfokus untuk mendukung kerja tim.",
-    bestFor: "Ekosistem website + dashboard admin (seperti studi kasus Ikbar), portal internal, MVP terfokus.",
+    bestFor: "Ekosistem website + dashboard admin (seperti studi kasus Dinasti), portal internal, MVP terfokus.",
     coreDeliverables: [
       "Seluruh standar kualitas desain & performa Velora Studio",
       "Perancangan skema database PostgreSQL & validasi input server-side",

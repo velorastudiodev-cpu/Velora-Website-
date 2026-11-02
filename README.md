@@ -6,9 +6,9 @@ Platform editorial dan konsultasi proyek Velora Studio berbasis **Next.js 15 App
 
 - **Ritme Desain Editorial Anti-AI-Slop**: Komposisi arsitektural Dark/Light menggunakan identitas faset resmi Velora (`velora-symbol-isolated.png`), tipografi `Space Grotesk` + `Plus Jakarta Sans` + `JetBrains Mono`, dan koreografi Framer Motion yang menghormati `prefers-reduced-motion`.
 - **Pemisahan Jujur Portofolio (`/karya` & `/karya/[slug]`)**:
-  - **Proyek Klien Terverifikasi**: *Ikbar Barbershop*, *Ikbar CMS Dashboard*, dan *Dzikri Mount Guide* lengkap dengan jendela inspeksi perangkat Desktop/Mobile serta tautan live.
+  - **Proyek Klien Terverifikasi**: *Dinasti Barbershop*, *Dinasti Dashboard*, dan *Dzikri Mount Guide* lengkap dengan jendela inspeksi perangkat Desktop/Mobile serta tautan live.
   - **Eksplorasi & Prototipe Internal**: *Ritme Operasi*, *Katalog Bumi Rasa*, dan *Arus Kas* berlabel transparan tanpa klaim metrik fiktif.
-- **Interactive Live CMS & Workflow Sandbox (`/#simulasi`)**: Simulasi interaktif bagi pengunjung untuk merasakan langsung kemudahan Custom CMS mandiri dan pelacakan status operasional.
+- **Hero WebGL (`src/components/home/hero-scene.ts`)**: Lanskap senja prosedural (shader) dengan simbol V Velora dari kaca 3D yang membiaskan latar (Three.js, dimuat terpisah, berhenti saat di luar layar, statis bila `prefers-reduced-motion`).
 - **Paket & Konfigurator Scope (`/paket` → `/mulai-proyek`)**: Eksplorasi arah paket dan modul fungsional yang otomatis melakukan *prefill* pada form brief.
 - **Backend Brief Tervalidasi (`POST /api/leads`) & Protected Admin (`/admin`)**: Validasi Zod di browser & server, honeypot anti-spam, pembatas laju IP, penyimpanan ke Supabase PostgreSQL (`schema.sql`), serta status jujur bila variabel database belum diatur.
 

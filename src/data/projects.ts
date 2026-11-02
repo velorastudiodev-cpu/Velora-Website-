@@ -17,6 +17,8 @@ export type VeloraProject = {
   pairedLabel?: string;
   summary: string;
   coverDesktop: string;
+  /** Tall full-page capture, auto-scrolled inside the home showcase browser frame. */
+  pageScroll?: string;
   desktopGallery: string[];
   mobileGallery: string[];
   stack: string[];
@@ -36,21 +38,19 @@ export const VELORA_PROJECTS: VeloraProject[] = [
     tierBadge: "Proyek Klien · Production Live",
     category: "website",
     categoryLabel: "Website Bisnis & Alur Booking",
-    title: "Ikbar Barbershop",
+    title: "Dinasti Barbershop",
     subtitle: "Pengalaman digital barbershop lokal dengan alur konsultasi gaya rambut & pemesanan langsung.",
-    clientName: "Ikbar / Dinasti Barbershop",
+    clientName: "Dinasti Barbershop",
     liveUrl: "https://ikbar-barbershop.vercel.app",
     pairedSlug: "ikbar-cms-dashboard",
-    pairedLabel: "Terhubung dengan Ikbar CMS Dashboard",
+    pairedLabel: "Terhubung dengan Dinasti Dashboard",
     summary:
       "Website publik berkecepatan tinggi yang dirancang untuk memperjelas layanan cukur pria, menampilkan portofolio potongan nyata, dan memotong hambatan calon pelanggan menuju reservasi.",
-    coverDesktop: "/projects/ikbar-hero-desktop.jpg",
-    desktopGallery: [
-      "/projects/ikbar-hero-desktop.jpg",
-      "/projects/ikbar-section-desktop.jpg",
-    ],
-    mobileGallery: ["/projects/ikbar-hero-mobile.jpg"],
-    stack: ["React", "Vite", "Tailwind CSS", "Supabase", "Responsive UI"],
+    coverDesktop: "/projects/dinasti-hero-desktop.jpg",
+    pageScroll: "/projects/dinasti-page.jpg",
+    desktopGallery: ["/projects/dinasti-hero-desktop.jpg", "/projects/dinasti-section-desktop.jpg"],
+    mobileGallery: ["/projects/dinasti-hero-mobile.jpg"],
+    stack: ["Preact", "Vite SSR Prerender", "Supabase", "Responsive UI"],
     challenge:
       "Pelanggan lokal sering ragu datang sebelum melihat hasil potongan asli, daftar layanan, lokasi yang akurat, serta cara bertanya jadwal tanpa harus menebak-nebak jam buka.",
     approach:
@@ -77,24 +77,24 @@ export const VELORA_PROJECTS: VeloraProject[] = [
     tierBadge: "Proyek Klien · Aplikasi Admin",
     category: "aplikasi",
     categoryLabel: "Aplikasi Web · Self-Service CMS",
-    title: "Ikbar CMS Dashboard",
+    title: "Dinasti Dashboard",
     subtitle: "Panel kendali mandiri bagi pemilik usaha untuk memperbarui isi website tanpa menyentuh kode.",
-    clientName: "Ikbar / Dinasti Barbershop",
+    clientName: "Dinasti Barbershop",
     liveUrl: "https://ikbar-barbershop-5rx3.vercel.app/dashboard",
     pairedSlug: "ikbar-barbershop",
-    pairedLabel: "Mengelola konten Ikbar Barbershop",
+    pairedLabel: "Mengelola konten Dinasti Barbershop",
     summary:
-      "Aplikasi admin privat dengan autentikasi Google terproteksi agar pemilik barbershop dapat mengubah informasi layanan, foto karya, dan konten operasional kapan saja secara mandiri.",
-    coverDesktop: "/projects/ikbar-cms-hero-desktop.jpg",
-    desktopGallery: ["/projects/ikbar-cms-hero-desktop.jpg"],
-    mobileGallery: ["/projects/ikbar-cms-hero-mobile.jpg"],
+      "Aplikasi admin privat dengan login Google terproteksi: pemilik mencatat penjualan harian, kas, dan modal, sekaligus mengubah layanan, harga, galeri, dan jam buka website kapan saja secara mandiri.",
+    coverDesktop: "/projects/dinasti-dashboard-desktop.jpg",
+    desktopGallery: ["/projects/dinasti-dashboard-desktop.jpg"],
+    mobileGallery: ["/projects/dinasti-dashboard-mobile.jpg"],
     stack: ["React", "TypeScript", "Supabase Database", "Google OAuth", "Protected Routes"],
     challenge:
       "Banyak website UMKM menjadi usang sebulan setelah rilis karena setiap perubahan harga, jam buka, atau foto mengharuskan pemilik menghubungi developer lagi.",
     approach:
       "Kami merancang panel manajemen khusus yang hanya menampilkan kontrol yang benar-benar dipakai pemilik sehari-hari, diamankan dengan pembatasan akun Google resmi milik pengelola.",
     architectureDecisions: [
-      "Gerbang autentikasi Google OAuth dengan whitelist akses hanya untuk akun resmi pengelola Ikbar Barbershop.",
+      "Gerbang autentikasi Google OAuth dengan whitelist akses hanya untuk akun resmi pengelola Dinasti Barbershop.",
       "Antarmuka CRUD yang disederhanakan untuk penggunaan cepat lewat ponsel maupun laptop tanpa istilah teknis yang membingungkan.",
       "Sinkronisasi langsung ke basis data utama sehingga perubahan konten tampil di website publik tanpa rebuild manual.",
     ],
@@ -105,7 +105,7 @@ export const VELORA_PROJECTS: VeloraProject[] = [
       "Serah terima akses pengelola beserta panduan operasional singkat",
     ],
     honestScopeNote:
-      "Halaman live menampilkan gerbang login terproteksi (akses dibatasi khusus pengelola Ikbar Barbershop untuk melindungi data operasional klien).",
+      "Tangkapan layar memakai data demo; data operasional asli klien tidak ditampilkan. Halaman live dilindungi login khusus pengelola Dinasti Barbershop.",
   },
   {
     id: "dzikri-mount-guide",
@@ -122,11 +122,8 @@ export const VELORA_PROJECTS: VeloraProject[] = [
     summary:
       "Platform layanan pendakian Gunung Ciremai, Papandayan, Prau, dan Merbabu yang menyajikan pilihan paket guide/porter, dokumentasi lapangan, serta FAQ keselamatan secara terstruktur.",
     coverDesktop: "/projects/dzikri-hero-desktop.jpg",
-    desktopGallery: [
-      "/projects/dzikri-hero-desktop.jpg",
-      "/projects/dzikri-section-desktop.jpg",
-      "/projects/dzikri-guide.jpg",
-    ],
+    pageScroll: "/projects/dzikri-page.jpg",
+    desktopGallery: ["/projects/dzikri-hero-desktop.jpg", "/projects/dzikri-section-desktop.jpg"],
     mobileGallery: ["/projects/dzikri-hero-mobile.jpg"],
     stack: ["Semantic Web", "Custom CSS Architecture", "Interactive Filtering", "Mobile Optimization"],
     challenge:
